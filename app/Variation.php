@@ -9,6 +9,6 @@ class Variation extends Model
     protected $fillable = ['description', 'products_id'];
     
     public function product(){
-        return $this->hasMany('App\Product');
+        return $this->belongsTo('App\Product');
     }
 }

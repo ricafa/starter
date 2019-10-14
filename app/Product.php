@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = ['description', 'price'];
 
     public function variations(){
-        return $this->belongsTo('App\Variation');
+        return $this->hasMany('App\Variation');
     }
 }
