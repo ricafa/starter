@@ -14,9 +14,9 @@ class VariationController extends Controller
      *     @OA\Response(response="200", description="List All Variations")
      * )
      */
-    public function index(int $id, $description)
+    public function index(int $id)
     {
-        return Variation::where('product_id', $id);
+        return Variation::where('product_id', $id)->get();
     }
 	
     /**

@@ -6,6 +6,7 @@ use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Database\Factories\ProductFactory;
 
 class ProductTest extends TestCase
 {
@@ -16,15 +17,23 @@ class ProductTest extends TestCase
      */
     public function testCreateProduct()
     {      
+		#authenticatiokn
         $payload = [
             'description' => 'Lorem',
             'price' => 9.50
         ];
 
-        $this->json('POST', '/products', $payload)
-            ->assertStatus(200)
+        return $this->json('POST', '/api/products', $payload)
+            ->assertStatus(201)
             ->assertJson(['id' => 1, 'description' => 'Lorem', 'price' => 9.50]);
     }
+	
+	public function delete_product() {
+        $product = factory(Product::class)->create();
+        $this->delete(route('products.destroy', $product->id))
+            ->assertStatus(204);
+    }
+	
     public function testsProductsAreUpdatedCorrectly()
     {
         $product = factory(Product::class)->create([
@@ -37,11 +46,10 @@ class ProductTest extends TestCase
             'price' => 9.50
         ];
 
-        $response = $this->json('PUT', '/products' . $product->id, $payload)
+        $this->json('PUT', '/api/products/'. $product->id, $payload)
             ->assertStatus(200)
-            ->assertJson([ 
-                'id' => 1, 
-                'ddescription' => 'Lorem',
+            ->assertJson([  
+                'description' => 'Lorem',
                 'price' => 9.50
             ]);
     }
@@ -56,7 +64,7 @@ class ProductTest extends TestCase
             'description' => 'Second prods',
             'price' => 9.50
         ]);
-        $response = $this->json('GET', '/api/articles', [])
+        $response = $this->json('GET', '/api/products', [])
             ->assertStatus(200)
             ->assertJson([
                 [ 'description' => 'First product', 'price' => 19.90 ],

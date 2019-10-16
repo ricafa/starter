@@ -29,6 +29,6 @@
         <server name="MAIL_DRIVER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
-        <servre name="DB_CONNECTION" value="sqlite"/>
+        <server name="DB_CONNECTION" value="sqlite"/>
     </php>
 </phpunit>
