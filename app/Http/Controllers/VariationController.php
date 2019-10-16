@@ -29,8 +29,7 @@ class VariationController extends Controller
     {	
 		$variation = new Variation($request->all());
 		$variation->product_id  = $id;
-		//$variation->description = $request->all()['description'];
-		echo 'save: '.$variation->save();
+		$variation->save();
         return response()->json($variation, 201);
     }
     
