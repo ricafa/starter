@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -24,9 +25,9 @@ class ProductTest extends TestCase
             ->assertStatus(200)
             ->assertJson(['id' => 1, 'description' => 'Lorem', 'price' => 9.50]);
     }
-    public function testsArticlesAreUpdatedCorrectly()
+    public function testsProductsAreUpdatedCorrectly()
     {
-        $product = factory(Article::class)->create([
+        $product = factory(Product::class)->create([
             'description' => 'First prod',
             'price' => 10
         ]);
@@ -44,14 +45,14 @@ class ProductTest extends TestCase
                 'price' => 9.50
             ]);
     }
-    public function testArticlesAreListedCorrectly()
+    public function testProductsAreListedCorrectly()
     {
-        factory(Article::class)->create([
+        factory(Product::class)->create([
             'description' => 'First product',
             'price' => 19.90
         ]);
 
-        factory(Article::class)->create([
+        factory(Product::class)->create([
             'description' => 'Second prods',
             'price' => 9.50
         ]);
