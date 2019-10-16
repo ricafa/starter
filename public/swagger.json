@@ -1,0 +1,18 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API"
+    },
+    "paths": {
+        "/api/products": {
+            "get": {
+                "operationId": "App\\Http\\Controllers\\ProductController::index",
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        }
+    }
+}

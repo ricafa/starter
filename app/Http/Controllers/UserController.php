@@ -11,6 +11,13 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
+
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     @OA\Response(response="200", description="Make login")
+     * )
+     */
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -26,6 +33,12 @@ class UserController extends Controller
         return response()->json(compact('token'));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     @OA\Response(response="201", description="Register new user")
+     * )
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

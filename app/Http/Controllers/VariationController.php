@@ -7,19 +7,24 @@ use App\Variation;
 
 class VariationController extends Controller
 {
-    public function index($description)
+
+    /**
+     * @OA\Get(
+     *     path="/api/products/{id}/variations",
+     *     @OA\Response(response="200", description="List All Variations")
+     * )
+     */
+    public function index(int $id, $description)
     {
-		#add search
-		#add product relationship
-		#add tests
-        return Variation::all();
+        return Variation::where('product_id', $id);
     }
 	
-    public function show(Variation $variation)
-    {
-        return $variation;
-    }
-	
+    /**
+     * @OA\Post(
+     *     path="/api/products/{id}/variations",
+     *     @OA\Response(response="201", description="Save")
+     * )
+     */
     public function store(int $id, Request $request)
     {	
 		$variation = new Variation($request->all());
@@ -28,13 +33,25 @@ class VariationController extends Controller
 		echo 'save: '.$variation->save();
         return response()->json($variation, 201);
     }
-	
+    
+    /**
+     * @OA\Put(
+     *     path="/api/products/{id}/variations",
+     *     @OA\Response(response="200", description="Update")
+     * )
+     */
     public function update(Request $request, Variation $variation)
     {
         $variation->update($request->all());
         return response()->json($variation, 200);
     }
 	
+    /**
+     * @OA\Delete(
+     *     path="/api/products/{id}/variations",
+     *     @OA\Response(response="204", description="Delete")
+     * )
+     */
     public function delete(Variation $variation)
     {
         $variation->delete();
